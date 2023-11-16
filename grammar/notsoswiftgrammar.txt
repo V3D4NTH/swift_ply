@@ -1,0 +1,28 @@
+[program] := [dekl_list]
+[dekl_list] := [dekl] || [expr] || [dekl][dekl_list]
+[dekl] := var [var_dekl]; || let [var_dekl];|| [fun_dekl]
+[var_dekl] :=  id : [dtype] || id : [dtype] = [expr]
+[fun_dekl] := func id([params]) -> [dtype][comp_block]
+[params] := [params_var]|| ee
+[params_var] :=  id : [dtype],[params_var] ||  id : [dtype]
+[expr] := [term]+[term] || [term]-[term] || [term]
+[term] := [expr] * [factor] || [exp] / [factor] || [factor]
+[factor] := ([expr]) || -[exp] || [val] || [call]
+[call] := id([arguments]); || id();
+[arguments] := [val],[arguments] || [val]
+[block] := [comp_block] || [loop_block] || [cond_block] || [ass_exp];[block] || return [expr];
+[comp_block] := {[block]}
+[loop_block] := for([loop_var];[condition];[step];)[comp_block]
+[cond_block] := if([condition])[comp_block] || if([condition])[comp_block]else[comp_block]
+[loop_var] := [var_dekl] || id
+[step] := id += digit || id -= digit
+[condition] := [expr] [relation_operator] [expr]
+[ass_exp] :=  var id : [dtype] = [expr] || let id : [dtype] = [expr] || id = [expr]
+[relation_operator] := == || < || > || >= || <= || !=
+[val] := id || digit
+[dtype] := int || bool
+ 
+
+
+digit := ^-?[0-9]+$
+id := ^[A-Za-z][A-Za-z0-9\_]*$
