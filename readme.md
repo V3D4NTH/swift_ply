@@ -13,10 +13,6 @@
 - ternary operator
 - boolean
 -------
-todo
-
-- array
-- string
 
 ## how to use
 ```
