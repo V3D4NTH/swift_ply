@@ -74,8 +74,8 @@ def t_Void(t):
     return t
 
 
-# chytam identifikatory
-# pokud je identifikator klicove slovo, zachyt to do typu
+# catch identifiers
+# if the identifier is a keyword, capture it in the type
 def t_id(t):
     r'[A-Za-z][A-Za-z0-9\_]*'
     if t.value in reserved_set:
@@ -83,18 +83,16 @@ def t_id(t):
     return t
 
 
-# token newline -> inkrementuj line number
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
 
-# neznamy token, zahlas chybu
 def t_error(t):
     print(f"Syntax error: '{t.value[0]}' at {t.lineno}")
 
 
-# zadefinuj token jako funkci - umozni k tomu pribalit nejaky vykonny kod
 def t_int(t):
     r'\-?\d+'
     try:
